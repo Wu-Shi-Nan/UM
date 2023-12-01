@@ -77,7 +77,7 @@ sns.set()
 random_state_new = 50
 jc = 10
 #%% 导入相关的数据
-data = pd.read_csv('E:\\Spyder_2022.3.29\\data\\machinel\\lrq_data\\liver_cut_data_recurrence_new.csv')
+data = pd.read_csv('data.csv')
 data = data.dropna()
 
 #%% 住院时间特征筛选
@@ -94,21 +94,9 @@ from imblearn.over_sampling import SMOTE
 from imblearn.over_sampling import ADASYN
 
 #%%自变量和因变量的选择
-features = ["GGT",
-            "N",
-            "Fibrinogen",
-            'Albumin',
-            'TB',
-            'M',
-            'AST',
-            'Plt',
-            'ALT',
-            'Total_cholesterol',
-            'L',
-            'NLR',
-            'Age']
+features = ['Features']
 
-indicator = ["Recurrence"]
+indicator = ["M"]
 
 X_data = data[features]
 y_data = data[indicator]
@@ -342,12 +330,12 @@ sns.set_style("white")
 disp.plot(cmap='RdPu')
 plt.title("Confusion Matrix of MLP in test set")
 plt.show()
-#%%最佳机器学习模型5折交叉验证
+#%%最佳机器学习模型10折交叉验证
 
 
 from sklearn.metrics import roc_auc_score, roc_curve, auc
 sns.set()
-cv = StratifiedKFold(n_splits=5)
+cv = StratifiedKFold(n_splits=10)
 tprs = []
 aucs = []
 mean_fpr = np.linspace(0, 1, 100)
